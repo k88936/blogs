@@ -7,6 +7,7 @@ export default defineConfig({
     title: "k88936's blogs",
     description: "A VitePress Site",
     base: "/blogs/",
+    outDir: "docs",
     head: [
         ['link', {rel: 'icon', type: 'image/x-icon', href: '/icon.png'}]
     ],
