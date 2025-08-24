@@ -2,7 +2,7 @@ import {defineConfig} from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    srcDir: "docs",
+    srcDir: "src",
 
     title: "k88936's blogs",
     description: "A VitePress Site",
