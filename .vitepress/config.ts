@@ -4,7 +4,7 @@ import {defineConfig} from 'vitepress'
 export default defineConfig({
     srcDir: "src",
 
-    title: "k88936's blogs",
+    title: "k88936's Blogs",
     description: "A VitePress Site",
     base: "/blogs/",
     outDir: "docs",

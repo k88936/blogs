@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "k88936's blogs"
+  name: "k88936's Blogs"
   text: "a record of "
   image: 
     src: /icon.png
