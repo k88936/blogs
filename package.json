@@ -12,6 +12,10 @@
     "preview": "vitepress preview"
   },
   "devDependencies": {
+    "unplugin-vue-components": "^29.0.0",
     "vitepress": "^2.0.0-alpha.12"
+  },
+  "dependencies": {
+    "element-plus": "^2.11.1"
   }
 }

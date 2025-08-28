@@ -1,6 +1,5 @@
 <script setup>
 import { withBase } from 'vitepress'
-
 // Expect posts to be passed as a prop
 defineProps({
   posts: {
@@ -12,14 +11,14 @@ defineProps({
 
 <template>
   <div class="post-list">
-    <ul class="posts">
-      <li v-for="post in posts" :key="post.url">
+    <el-timeline class="posts">
+      <el-timeline-item v-for="(post,index) in posts" :key="index" :timestamp="post.date.string">
         <a :href="withBase(post.url)" class="post-link">
           <span class="post-title">{{ post.title }}</span>
           <span class="post-date">{{ post.date.string }}</span>
         </a>
-      </li>
-    </ul>
+      </el-timeline-item>
+    </el-timeline>
   </div>
 </template>
 
@@ -46,8 +45,6 @@ defineProps({
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
   margin-bottom: 0.75rem;
   color: var(--vp-c-text-1);
   text-decoration: none;
@@ -59,7 +56,6 @@ defineProps({
 
 .post-link:hover {
   border-color: var(--vp-c-brand);
-  background-color: var(--vp-c-bg-soft);
   transform: translateY(-1px);
 }
 
