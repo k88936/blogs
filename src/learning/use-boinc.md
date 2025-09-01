@@ -17,8 +17,17 @@ title: use boinc
 优点是可以利用显卡，archlinux的wiki说明也很详细。但是如果你在自己的账号运行，下载的各种东西会把你的home弄乱。
 ## 2. docker
 优点开箱即用，隔离性更好。我选docker
-
+[demo](https://github.com/k88936/boinc)
 # 运行
 ## 使用命令行
+```shell 
+boinccmd
+```
 ## 添加账户管理 science united
+```shell
+boinccmd --acct_mgr attach URL name passwd  attach to account manager
+```
 ## 添加 world community grid
+```shell
+boinccmd --project_attach URL auth
+```
