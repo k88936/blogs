@@ -213,15 +213,20 @@ $principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType
 Register-ScheduledTask -TaskName "MountDrivesAtBoot" -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description "Run diskpart script at boot to mount volumes"
 ```
 ## feature
+wsl
 ```powershell
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
+hyper-v
 ```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 Enable-WindowsOptionalFeature -Online -FeatureName "Containers-DisposableClientVM" -All
 ```
-
+## ssl cert
+```powershell
+Import-Certificate -FilePath ${HOME}/cert.pem -CertStoreLocation Cert:\LocalMachine\Root
+```
 ## extra install
 ```powershell
 winget install Microsoft.VisualStudio.2022.BuildTools 
