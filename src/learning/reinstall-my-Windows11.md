@@ -182,7 +182,7 @@ scoop install tencent-sandbox
 ```
 
 ## restore apps 
-[see](https://k88936.github.io/2025/03/05/%E5%A4%87%E4%BB%BD%E6%8A%98%E8%85%BE%E8%AE%B0.html)
+[see](https://k88936.github.io/blogs/learning/my-backup-solution.html#xxxrc%E7%AD%89%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
 
 ## fix WTF is ms-gamingoverlay
 ```powershell
