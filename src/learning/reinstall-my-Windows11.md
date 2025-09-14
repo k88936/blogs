@@ -177,7 +177,7 @@ scoop install clash-verge-rev
 scoop bucket add kvto https://github.com/k88936/scoop-bucket
 scoop install envmgr
 scoop install pwshrc
-scoop install Shotmd
+scoop install shotmd
 scoop install tencent-sandbox
 ```
 
