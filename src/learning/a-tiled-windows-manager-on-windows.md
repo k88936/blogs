@@ -116,7 +116,7 @@ window_rules:
   - commands: ['shell-exec explorer']
     bindings: ['lwin+e']
 
-  - commands: ['shell-exec Shotmd']
+  - commands: ['shell-exec shotmd']
     bindings: ['lwin+s']
 ```
-这个Shotmd是我自己写的一个程序(screenshoot to markdown : [Shotmd](https://github.com/k88936/Shotmd)), 用来截图,直接嵌入markdown的.
+这个shotmd是我自己写的一个程序(screenshoot to markdown : [shotmd](https://github.com/k88936/shotmd)), 用来截图,直接嵌入markdown的.
