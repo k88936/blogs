@@ -9,6 +9,17 @@ title: reinstall my Windows11
 重装到win10 选择专业版,然后登录微软账号激活.  
 然后再升级到win11, 完事就是专业版...  
 
+## Win11的OOBE阶段启用Administrator账户并跳过账户创建步骤
+```cmd
+# 启用Administrator账户
+net user Administrator /active:yes
+# 跳过OOBE账户创建步骤并重启系统
+oobe\msoobe && shutdown -r
+```
+[reference](https://vae.life/archives/win11skipoobe)
+
+
+
 ## 升级之后删除C盘Windows.old
 1. 右键点击C盘，选择“属性”。
 2. 在“常规”选项卡中，点击“磁盘清理”按钮。
