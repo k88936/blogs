@@ -31,3 +31,5 @@ boinccmd --acct_mgr attach URL name passwd  attach to account manager
 ```shell
 boinccmd --project_attach URL auth
 ```
+[reference](https://www.worldcommunitygrid.org/help/topic.s?shortName=boinc)
+[where is auth](https://www.worldcommunitygrid.org/ms/viewMyProfile.do)
