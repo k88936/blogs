@@ -18,7 +18,12 @@ oobe\msoobe && shutdown -r
 ```
 [reference](https://vae.life/archives/win11skipoobe)
 
-
+## Dev Drive 扩容
+```powershell
+Resize-VHD -Path '.\DevDrive.vhdx' -SizeBytes 100GB
+```
+and then expend the volumn  
+[reference](https://devenliu.com/blog/zh-CN/dev-drive-expansion/)
 
 ## 升级之后删除C盘Windows.old
 1. 右键点击C盘，选择“属性”。
