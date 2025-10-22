@@ -77,9 +77,11 @@ AuthorizedKeysFile .ssh/authorized_keys
 
 
 
-#### 对于管理员用户（如 Administrator）：
-##### 公钥要放在`C:\ProgramData\ssh\administrators_authorized_keys`
-##### 设置正确权限
+
+
+### 对于管理员用户（如 Administrator）：
+#### 公钥要放在`C:\ProgramData\ssh\administrators_authorized_keys`
+#### 设置正确权限
 ```powershell
 # 设置公钥文件路径
 $filePath = "C:\ProgramData\ssh\administrators_authorized_keys"
@@ -94,6 +96,11 @@ $acl.SetAccessRuleProtection($true, $false)
 Set-Acl $filePath $acl
 # 重启 SSH 服务
 Restart-Service sshd
+```
+## to use powershell
+add to config
+```
+DefaultShell C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 ```
 
 ## 配置 SSH 客户端别名
