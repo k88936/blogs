@@ -98,9 +98,8 @@ Set-Acl $filePath $acl
 Restart-Service sshd
 ```
 ## to use powershell
-add to config
-```
-DefaultShell C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+```powershell
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
 ```
 
 ## 配置 SSH 客户端别名
