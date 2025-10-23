@@ -19,7 +19,9 @@ cat .configure/backup/arch_packages | xargs yay -S --noconfirm --needed
 * win scoop
 backup
 ```shell
-scoop list | awk 'NR > 3 && $1 != "" {print $1}' > .configure/backup/scoop_packages
+#outdated
+# scoop list | awk 'NR > 3 && $1 != "" {print $1}' > .configure/backup/scoop_packages
+scoop list | Out-String -Stream | Select-Object -Skip 3 | Where-Object { $_ -match '^\S' } | ForEach-Object { ($_ -split '\s+')[0] } > .\.configure\backup\scoop_packages
 ```
 retore
 ```shell
