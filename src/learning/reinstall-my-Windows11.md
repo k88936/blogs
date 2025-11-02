@@ -193,8 +193,11 @@ scoop install clash-verge-rev
 scoop bucket add kvto https://github.com/k88936/scoop-bucket
 scoop install envmgr
 scoop install pwshrc
+
+```
+```powershell
+scoop install malware-sandbox
 scoop install shotmd
-scoop install tencent-sandbox
 ```
 
 ## restore apps 
