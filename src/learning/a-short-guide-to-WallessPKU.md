@@ -60,14 +60,12 @@ clash-verge-rev已知问题(on linux):
 prepend:
   - 'DOMAIN-SUFFIX,api.jetbrains.ai,🧱 GFW'
   - 'DOMAIN-SUFFIX,docker.io,🧱 GFW'
-  - 'DOMAIN,scholar.google.com,🧱 GFW'
-  - 'IP-CIDR,59.66.0.0/16,🧱 GFW'
-  - 'DOMAIN-SUFFIX,camel-ai.org,🧱 GFW'
-  - 'DOMAIN,libgdx.com,🧱 GFW'
   - 'DOMAIN-SUFFIX,tsinghua.edu.cn,DIRECT'
+  - 'DOMAIN-SUFFIX,k88936.top,DIRECT'
   - 'DOMAIN,copilot.microsoft.com,🧱 GFW'
 append: []
 delete: []
+
 ```
 你看见砖头没?
 #### 服务器mixin.yaml示例:
