@@ -1,28 +1,19 @@
 ---
-date: 2025-10-31
-title: teamcity-agent-on-win
+date: 2025-10-16
+title: about Teamcity
 ---
-
-# simple pass
+# install
+## win agent
+ensure privilege (allow Administrator run as service) to fix [Installing Teamcity build agent as a user: failed to install the service. selected account does not have enough rights](https://stackoverflow.com/questions/30718514/installing-teamcity-build-agent-as-a-user-failed-to-install-the-service-select)
 ```powershell
-secedit /export /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY; (Get-Content "$env:TEMP\sec.cfg") -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 1' | Set-Content "$env:TEMP\sec.cfg"; secedit /configure /db "$env:TEMP\secedit.sdb" /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY
-net user Administrator admin
-
-```
-
-# previledge (allow Administrator run as service)
-install choco
-```powershell
+# install choco
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
-grant previledge
-```powershell
+# grant privilege
 choco install Carbon
 Import-Module 'Carbon'
-Grant-CPrivilege -Identity $SERVICE_USERNAME -Privilege SeServiceLogonRight
+Grant-Privilege -Identity Administrator -Privilege SeServiceLogonRight
 ```
-
-# install
+formal install
 ```powershell
 function Install-TeamCityAgent {
     param (
@@ -150,10 +141,7 @@ function Install-TeamCityAgent {
 
     Write-Host "TeamCity agent '$AgentName' installed and started."
 }
-```
-usage: 
 
-```powershell
 Install-TeamCityAgent `
   -ServerUrl "https://teamcity.k88936.top" `
   -AgentName "windows-agent" `
@@ -161,9 +149,34 @@ Install-TeamCityAgent `
   -ServiceAccount ".\Administrator" `
   -ServiceAccountPassword "admin"
 ```
+in fact this is inspiring to me that a one-central-multi-workers service and deployed like this.
+
+> [privilege](https://stackoverflow.com/questions/30718514/installing-teamcity-build-agent-as-a-user-failed-to-install-the-service-select)  
+> [get-carbon](https://get-carbon.org/about_Carbon_Installation.html)  
+> [teamcity-install-script](https://community.chocolatey.org/packages/TeamCityAgent#files)
+
+---
+
+## linux-agent
+
+* install From Archlinux AUR  
+  pron:
+    * accessible to the toolchains on host
+    * share the proxy service on the host
+
+  conn:
+    * weak isolation
+    * it will overwrite many config after upgrade (this is posibly the problem of the makepkg config)
+
+* Build my own docker image
+  this way, we need to solve these problems:
+    * lack of toolchains
+        - this can be easily solved by extend the official image or use image for different build
+    * proxy
+        - by adding proxy variable to environment
+        - note for docker-compose, we need to add extra_host, and fuckingly strange, we need to set bridge as network_mode
+        - for dockerd in docker, we need to use /etc/default/docker to config proxy
+    
+  [the whole](https://github.com/k88936/teamcity-agent)
 
 
-# reference
-[priviledge](https://stackoverflow.com/questions/30718514/installing-teamcity-build-agent-as-a-user-failed-to-install-the-service-select)
-[get-carbon](https://get-carbon.org/about_Carbon_Installation.html)
-[teamcity-install-script](https://community.chocolatey.org/packages/TeamCityAgent#files)

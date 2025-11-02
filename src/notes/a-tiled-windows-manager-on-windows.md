@@ -30,42 +30,30 @@ GlazeWM和(可选的依赖zebar状态栏组件)都可以用scoop安装,这点还
 用win键有这么一个问题: explorer自带了大量的快捷键, 比如win+e打开资源管理器, win+v打开剪贴板历史, win+shift+s截图等.  
 这些快捷键和GlazeWM的冲突了,  
 两者之间取其善, 我想办法关闭windows的这些快捷键:   
-
-> 1.首先，打开“开始菜单”，并输入“gpedit”搜索并打开组策略编辑器<img src="https://pic1.zhimg.com/50/v2-d8c2646dc19a0191f3a0f2d26415c30f_720w.jpg?source=1def8aca" data-caption="" data-size="small" data-rawwidth="204" data-rawheight="127" data-original-token="v2-d8c2646dc19a0191f3a0f2d26415c30f" data-default-watermark-src="https://pic1.zhimg.com/50/v2-c6dabb901a355d1bda4732da19777b36_720w.jpg?source=1def8aca" class="content_image" width="204"/>2.接着，在左侧的窗格中依次找到“用户配置-管理模板-Windows组件”<img src="https://picx.zhimg.com/50/v2-8a15f076c70dfea9f652a849a5f3effc_720w.jpg?source=1def8aca" data-caption="" data-size="normal" data-rawwidth="901" data-rawheight="527" data-original-token="v2-8a15f076c70dfea9f652a849a5f3effc" data-default-watermark-src="https://pic1.zhimg.com/50/v2-f686f1b14d867fe405acfe5861172898_720w.jpg?source=1def8aca" class="origin_image zh-lightbox-thumb" width="901" data-original="https://pic1.zhimg.com/v2-8a15f076c70dfea9f652a849a5f3effc_r.jpg?source=1def8aca"/>3.然后，在左侧展开的菜单中找到“文件资源管理器”，在右侧找到并双击”关闭Windows键热键”<img src="https://picx.zhimg.com/50/v2-769fbec7c0a5cda555d72e1365d7adec_720w.jpg?source=1def8aca" data-caption="" data-size="normal" data-rawwidth="868" data-rawheight="526" data-original-token="v2-769fbec7c0a5cda555d72e1365d7adec" data-default-watermark-src="https://picx.zhimg.com/50/v2-d5081134a211aaae36e21bca0e44c6ab_720w.jpg?source=1def8aca" class="origin_image zh-lightbox-thumb" width="868" data-original="https://pic1.zhimg.com/v2-769fbec7c0a5cda555d72e1365d7adec_r.jpg?source=1def8aca"/>4.在弹出的对话窗口中选择“已启用”选项，并依次点击“应用”->“确定”按钮即可<img src="https://pica.zhimg.com/50/v2-858dc5de215fab5ac8966e20d3682daf_720w.jpg?source=1def8aca" data-caption="" data-size="normal" data-rawwidth="689" data-rawheight="639" data-original-token="v2-858dc5de215fab5ac8966e20d3682daf" data-default-watermark-src="https://pic1.zhimg.com/50/v2-e32940afbc5acbc5569d0076bc5feca1_720w.jpg?source=1def8aca" class="origin_image zh-lightbox-thumb" width="689" data-original="https://picx.zhimg.com/v2-858dc5de215fab5ac8966e20d3682daf_r.jpg?source=1def8aca"/>
-
-[参考1](https://www.zhihu.com/question/512157683) 
-> 禁用 Win+L 键和锁定功能: 创建系统还原点或备份注册表后，打开“运行”，输入regedit，然后按 Enter 键打开注册表编辑器。找到以下路径：```HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System```  在右侧窗格中，右键单击空白处，选择“新建” > “DWORD（32 位）值”，命名为“DisableLockWorkstation”，  然后双击它，将值设置为 1。(0表示启用，1表示禁用)
-
-[参考2](https://cn.windows-office.net/?p=18346)    
-参考2这里的win+L锁屏真是毒瘤,注册表项默认没有, 需要自己添加.  
-
-
-* 使用脚本的话
+* 使用脚本
   
 ```powershell
 # 创建注册表路径和键值
 $Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System"
 $Name = "DisableLockWorkstation"
 $Value = 1
-
 # 检查路径是否存在，不存在则创建
 if (-not (Test-Path $Path)) {
     New-Item -Path $Path -Force | Out-Null
 }
-
 # 设置值
 New-ItemProperty -Path $Path -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
-
 Write-Host "已成功禁用 Win+L 锁屏快捷键。" -ForegroundColor Green
-
 
 # 启用“关闭 Windows 键热键”组策略（会禁用大部分 Win+X 组合）
 # 注意：这不是注册表，要用 PowerShell 调用组策略对象
-
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoWinKeys" -Value 1 -Type DWORD
-
 Write-Host "已成功禁用 Win+* 快捷键。" -ForegroundColor Green
 ```
+> [参考1](https://www.zhihu.com/question/512157683)  
+> [参考2](https://cn.windows-office.net/?p=18346)
+
+
 ### start on boot
 ```powershell
 # Define paths
@@ -98,24 +86,19 @@ window_rules:
     match:
       # Ignores any Zebar windows.
       - window_process: { equals: "zebar" }
-
       # Ignore rules for various 3rd-party apps.
       - window_process: { equals: 'Taskmgr' }
       - window_process: { regex: '\w*PowerToys Settings' }
       - window_process: { equals: 'msrdc' }         # 远程桌面(wsl2)用到的,支持的不好,会异常. 
 ```
-
 一些使用快捷键:
 ```yaml
   - commands: ['shell-exec pwsh']
     bindings: ['lwin+enter']
-
   - commands: ['shell-exec wsl']
     bindings: ['lwin+shift+enter']
-
   - commands: ['shell-exec explorer']
     bindings: ['lwin+e']
-
   - commands: ['shell-exec shotmd']
     bindings: ['lwin+s']
 ```

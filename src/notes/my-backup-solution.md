@@ -4,7 +4,7 @@ title: My backup solution
 ---
 前几天wsl挂载错误手欠unregister了一下，把整个vhd给删了，又陆陆续续花了几天重新配环境，痛定思痛，决定好好备份一下。
 
-# .xxxrc等配置文件
+# .*rc等配置文件
 包括.vimrc等，还额外存了一个软件包列表。
 * arch
 backup
@@ -19,7 +19,7 @@ cat .configure/backup/arch_packages | xargs yay -S --noconfirm --needed
 * win scoop
 backup
 ```shell
-#outdated
+# outdated because scoop now output is a dotnet Object, not pure string, fuckingly stupid!
 # scoop list | awk 'NR > 3 && $1 != "" {print $1}' > .configure/backup/scoop_packages
 scoop list | Out-String -Stream | Select-Object -Skip 3 | Where-Object { $_ -match '^\S' } | ForEach-Object { ($_ -split '\s+')[0] } > .\.configure\backup\scoop_packages
 ```
@@ -29,9 +29,7 @@ scoop bucket add extras
 scoop bucket add java
 cat .configure/backup/scoop_packages | xargs scoop install
 ```
-
 这部分大多是文本文件，直接在root建仓库丢gitee上
-
 > 成本：0
 
 

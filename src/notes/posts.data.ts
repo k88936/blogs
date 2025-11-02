@@ -1,2 +1,2 @@
 import genPostsData from "../common/base.data";
-export default  genPostsData("learning/")
+export default  genPostsData("notes/")
