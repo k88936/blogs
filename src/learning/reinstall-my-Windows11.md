@@ -232,15 +232,9 @@ $principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType
 Register-ScheduledTask -TaskName "MountDrivesAtBoot" -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description "Run diskpart script at boot to mount volumes"
 ```
 ## feature
-wsl
+wsl/hyper-v
 ```powershell
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-```
-hyper-v
-```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-Enable-WindowsOptionalFeature -Online -FeatureName "Containers-DisposableClientVM" -All
+Get-WindowsOptionalFeature -Online |? FeatureName -match 'Microsoft-Windows-Subsystem-Linux|Hyper.*' |? State -eq Disabled | Enable-WindowsOptionalFeature -Online -NoRestart
 ```
 ## ssl cert
 ```powershell
