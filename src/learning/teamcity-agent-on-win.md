@@ -5,9 +5,8 @@ title: teamcity-agent-on-win
 
 # simple pass
 ```powershell
-
-secedit /configure /db secedit.sdb /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY; (Get-Content "$env:TEMP\sec.cfg") -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 1' | Set-Content "$env:TEMP\sec.cfg"; secedit /configure /db secedit.sdb /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY
-net user <username> <newpassword>
+secedit /export /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY; (Get-Content "$env:TEMP\sec.cfg") -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' -replace 'MinimumPasswordLength = \d+', 'MinimumPasswordLength = 1' | Set-Content "$env:TEMP\sec.cfg"; secedit /configure /db "$env:TEMP\secedit.sdb" /cfg "$env:TEMP\sec.cfg" /areas SECURITYPOLICY
+net user Administrator admin
 
 ```
 
