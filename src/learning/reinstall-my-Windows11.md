@@ -3,12 +3,6 @@ date: 2025-4-26
 title: reinstall my Windows11
 ---
 
-# 4-26
-## 家庭版白嫖专业版
-先下载到了win10和win11的安装镜像.  
-重装到win10 选择专业版,然后登录微软账号激活.  
-然后再升级到win11, 完事就是专业版...  
-
 ## Win11的OOBE阶段启用Administrator账户并跳过账户创建步骤
 ```cmd
 # 启用Administrator账户
@@ -244,3 +238,25 @@ Import-Certificate -FilePath ${HOME}/cert.pem -CertStoreLocation Cert:\LocalMach
 ```powershell
 winget install Microsoft.VisualStudio.2022.BuildTools 
 ```
+
+
+## power related
+```powershell
+powercfg /hibernate on
+
+# Disable sleep (standby) timeout
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP STANDBYIDLE 0
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP STANDBYIDLE 0
+
+# Disable hibernate timeout (system won't auto-hibernate)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP HIBERNATEIDLE 0
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP HIBERNATEIDLE 0
+
+# Set power button to hibernate (AC and DC)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_BUTTONS PBUTTONACTION 2
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_BUTTONS PBUTTONACTION 2
+
+# Apply the active power scheme
+powercfg /setactive SCHEME_CURRENT
+```
+
