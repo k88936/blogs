@@ -44,5 +44,22 @@ pacman -S hdparm
 ```shell
 hdparm -Tt /dev/sda
 ```
-
 ---
+
+
+# proxy dockerd
+```shell
+sudo mkdir -p /etc/systemd/system/docker.service.d
+cat > /etc/systemd/system/docker.service.d/proxy.conf <<'EOF'
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:7890"
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+Environment="NO_PROXY=localhost,127.0.0.1"
+EOF
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+# vertify
+systemctl show --property=Environment docker
+```
+[reference](https://chat.qwen.ai/s/87ddf6e6-6c0a-490d-851c-cfe7c5e73721?fev=0.0.237)
