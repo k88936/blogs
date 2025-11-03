@@ -176,7 +176,7 @@ Register-ScheduledTask -TaskName "MountDrivesAtBoot" -Action $action -Trigger $t
 # feature
 wsl/hyper-v
 ```powershell
-Get-WindowsOptionalFeature -Online |? FeatureName -match 'Microsoft-Windows-Subsystem-Linux|Hyper.*' |? State -eq Disabled | Enable-WindowsOptionalFeature -Online -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V,Microsoft-Hyper-V-Management-PowerShell,HypervisorPlatform,Microsoft-Windows-Subsystem-Linux -All -NoRestart
 ```
 # ssl cert
 ```powershell
