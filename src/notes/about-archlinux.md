@@ -68,3 +68,17 @@ sudo systemctl restart docker
 sudo systemctl show --property=Environment docker
 ```
 [reference](https://chat.qwen.ai/s/87ddf6e6-6c0a-490d-851c-cfe7c5e73721?fev=0.0.237)
+
+
+
+# aur
+init a new pkg
+```shell
+git -c init.defaultBranch=master clone ssh://aur@aur.archlinux.org/pkgbase.git
+```
+update
+```shell
+makepkg --printsrcinfo > .SRCINFO
+git add PKGBUILD .SRCINFO
+# commit and push
+```
