@@ -51,12 +51,12 @@ hdparm -Tt /dev/sda
 ```shell
 sudo mkdir -p /etc/systemd/system/docker.service.d
 # the shell redirection (>) is handled by your current user's shell
-sudo sh -c 'cat > /etc/systemd/system/docker.service.d/proxy.conf <<EOF
+sudo tee /etc/systemd/system/docker.service.d/proxy.conf <<EOF
 [Service]
 Environment="HTTP_PROXY=http://127.0.0.1:7890"
 Environment="HTTPS_PROXY=http://127.0.0.1:7890"
 Environment="NO_PROXY=localhost,127.0.0.1"
-EOF'
+EOF
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
 sudo systemctl restart docker
