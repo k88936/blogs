@@ -50,7 +50,6 @@ hdparm -Tt /dev/sda
 # proxy dockerd
 ```shell
 sudo mkdir -p /etc/systemd/system/docker.service.d
-# the shell redirection (>) is handled by your current user's shell
 sudo tee /etc/systemd/system/docker.service.d/proxy.conf <<EOF
 [Service]
 Environment="HTTP_PROXY=http://127.0.0.1:7890"
