@@ -46,6 +46,11 @@ hdparm -Tt /dev/sda
 ```
 ---
 
+# Fix pacman ldconfig "file is empty, not checked" error
+```shell
+pacman -Syyu $(pacman -Qnq) --overwrite '*'
+```
+[refer](https://gist.github.com/metzenseifner/cb61ecfd614a93c5927ba3cd62d68127)
 
 # proxy dockerd
 ```shell
