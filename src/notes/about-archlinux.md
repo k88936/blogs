@@ -82,6 +82,7 @@ makepkg --printsrcinfo > .SRCINFO
 git add PKGBUILD .SRCINFO
 # commit and push
 ```
+lto issue when packaging rust: [refer](https://github.com/briansmith/ring/issues/1444)
 
 # reset keyring
 ```shell
