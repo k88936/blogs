@@ -82,3 +82,11 @@ makepkg --printsrcinfo > .SRCINFO
 git add PKGBUILD .SRCINFO
 # commit and push
 ```
+
+# reset keyring
+```shell
+sudo rm -rf /etc/pacman.d/gnupg
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+```
+[refer](https://razonyang.com/zh-hans/blog/archlinux/reset-keyring/)
