@@ -91,3 +91,25 @@ sudo pacman-key --init
 sudo pacman-key --populate archlinux
 ```
 [refer](https://razonyang.com/zh-hans/blog/archlinux/reset-keyring/)
+
+# key mapping
+```shell
+# Install keyd
+if ! command -v keyd &>/dev/null; then
+    sudo pacman -S --noconfirm keyd
+fi
+
+# Write keyd config to swap CapsLock and Escape
+sudo tee /etc/keyd/default.conf >/dev/null <<EOF
+[ids]
+*
+
+[main]
+capslock = esc
+esc = capslock
+EOF
+
+# Reload or start keyd
+sudo systemctl enable --now keyd
+sudo keyd reload
+```
