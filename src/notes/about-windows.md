@@ -10,6 +10,8 @@ net user Administrator admin
 ```
 ---
 # Win11 only
+try this [win11debloat](https://github.com/Raphire/Win11Debloat) first
+
 use Administrator and pass OOBE
 ```cmd
 # 启用Administrator账户
