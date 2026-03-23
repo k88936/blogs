@@ -1,0 +1,15 @@
+---
+date: 2025-3-23
+title: memory of tiaozhan cup
+---
+it started last term, when caihaoyu gaxianchu zhanghuaian just finished their work at kaituo cup, which is a game from our college.
+I am responsile for the algo part, and experiment with rust for sci computing and optimize method.
+by now rust still has its long way to practice use in sci computing domain, as python has more complete and mature library and AI support.
+I had a long way to migrate a py lib: poliastro into rust native, which takes me a day and some copilot quota.
+besides that, I wrote all code almost by hand. And designed a mini boinc, but never used, since the scale is relative small.
+Observing the optimizing path, I noticed something interesting when using particle swarm optimizer. I initially choose 32*6 dim as my search space, and as expected, the argmin stuck with no progress.
+I later tested only one server satellite with one client satellite. result is that with 256 or more particle num, argmin easily matched the client orbit. (proved by plotting the two orbit and with my bright eyes :p)
+another attempt such as make the target func continue, via which I expect that opt algo can notice more info on the loss func instead of facing almost a plain.
+That does not work, and I concluded that we need more and more and more particles when the num of dim explodes. I tried 1024*16 but that farly does not enough and is unacceptably slow.
+last but not least, I go back to one deploy one time, splitting the problem into 32 (or less) steps, and deploy server satellites one by one. for this, 512 particles easily pushed the optimization.
+a harsh real world problem? yeah.
